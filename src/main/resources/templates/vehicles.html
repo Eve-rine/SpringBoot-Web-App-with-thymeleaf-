@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        form {
+            display: none;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #showFormButton {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<h2>Vehicles</h2>
+<!--<button id="showFormButton">Add</button> &lt;!&ndash; Add button to show the form &ndash;&gt;-->
+
+<form id="addVehicleForm" action="/vehicles/add" method="post">
+    <div class="form-group">
+        <label for="vehicle_registration">Registration Number:</label>
+        <input type="text" id="vehicle_registration" name="vehicle_registration" placeholder="Enter registration number" required>
+    </div>
+    <div class="form-group">
+        <label for="Vehicle_type">Vehicle Type:</label>
+        <input type="text" id="vehicle_type" name="Vehicle_type" placeholder="Enter vehicle type" required>
+    </div>
+    <div class="form-group">
+        <label for="Vehicle_make">Vehicle Make:</label>
+        <input type="text" id="vehicle_make" name="Vehicle_make" placeholder="Enter vehicle make" required>
+    </div>
+    <div class="clear"></div> <!-- Clear floating elements -->
+    <input type="submit" value="Submit">
+</form>
+<table style="margin-top: 30px">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Registration</th>
+        <th>Type</th>
+        <th>Make</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="vehicle : ${vehicles}">
+        <td th:text="${vehicle.Id}"></td>
+        <td th:text="${vehicle.vehicle_registration}"></td>
+        <td th:text="${vehicle.vehicle_type}"></td>
+        <td th:text="${vehicle.vehicle_make}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    // JavaScript code to toggle visibility of the form when the "Add" button is clicked
+    document.getElementById("showFormButton").addEventListener("click", function() {
+        var form = document.getElementById("addVehicleForm");
+        if (form.style.display === "none") {
+            form.style.display = "block"; // Show the form
+        } else {
+            form.style.display = "none"; // Hide the form
+        }
+    });
+</script>
+</body>
+</html>
